@@ -60,7 +60,6 @@ program.on('command:*', () => {
 });
 
 if (process.argv.length <= 2) {
-  showBanner();
   showMenu().catch((err: unknown) => {
     logger.error(err instanceof Error ? err.message : String(err));
     process.exit(1);
