@@ -1,4 +1,5 @@
 import { Command, CommanderError } from 'commander';
+import { createRequire } from 'module';
 import { showBanner } from './ui/banner.js';
 import { showMenu, showHelp } from './ui/menu.js';
 import { initCommand } from './commands/init.js';
@@ -6,11 +7,13 @@ import { newCommand } from './commands/new.js';
 import { listCommand } from './commands/list.js';
 import { statusCommand } from './commands/status.js';
 import { logger } from './utils/logger.js';
+const require = createRequire(import.meta.url);
+const { version } = require('../package.json');
 const program = new Command();
 program
     .name('ctxflow')
     .description('Context scaffolding for AI agent-driven development')
-    .version('1.0.0')
+    .version(version)
     .exitOverride()
     .configureOutput({ outputError: () => { } }); // suppress commander's raw error lines
 program
@@ -48,6 +51,7 @@ program.on('command:*', () => {
     process.exit(1);
 });
 if (process.argv.length <= 2) {
+    showBanner();
     showMenu().catch((err) => {
         logger.error(err instanceof Error ? err.message : String(err));
         process.exit(1);
