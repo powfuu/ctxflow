@@ -1,0 +1,35 @@
+# Requirements: test
+
+> Created: 2026-06-07
+> Status: Draft
+
+## Context
+
+<!-- Why is this feature needed? What user problem does it solve? What is the business motivation? -->
+
+## Stack
+
+<!-- Which parts of the stack does this feature touch? -->
+
+-
+-
+
+## Constraints
+
+<!-- Technical, time, or business constraints that affect implementation -->
+
+-
+-
+
+## Out of scope
+
+<!-- What is explicitly NOT part of this feature (to avoid scope creep) -->
+
+-
+-
+
+## Acceptance criteria
+
+- [ ]
+- [ ]
+- [ ]
