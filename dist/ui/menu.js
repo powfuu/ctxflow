@@ -4,11 +4,12 @@ import { initCommand } from '../commands/init.js';
 import { newCommand } from '../commands/new.js';
 import { listCommand } from '../commands/list.js';
 import { statusCommand } from '../commands/status.js';
-import { readDir, pathExists } from '../utils/fs.js';
+import { readDir } from '../utils/fs.js';
+import { isProjectInitialised } from '../utils/agents.js';
 import { join } from 'path';
 const MAIN_CHOICES = [
     { key: '1', label: 'New feature', desc: '— scaffold a new feature context', value: 'new' },
-    { key: '2', label: 'Init project', desc: '— create CLAUDE.md + /docs structure', value: 'init' },
+    { key: '2', label: 'Init project', desc: '— create AI context file(s) + /docs structure', value: 'init' },
     { key: '3', label: 'List features', desc: '— show all existing plans', value: 'list' },
     { key: '4', label: 'Status', desc: '— check tasks in a feature plan', value: 'status' },
     { key: '5', label: 'Help', desc: '— show usage and documentation', value: 'help' },
@@ -177,9 +178,8 @@ async function handleInit() {
 }
 async function handleStatus() {
     const cwd = process.cwd();
-    const claudePath = join(cwd, 'CLAUDE.md');
     const featuresDir = join(cwd, 'docs', 'features');
-    if (!(await pathExists(claudePath))) {
+    if (!(await isProjectInitialised(cwd))) {
         console.log(chalk.yellow('  ⚠ ctxflow not initialised here. Run `ctxflow init` first.'));
         return 'done';
     }
@@ -212,7 +212,7 @@ export function showHelp() {
     console.log(chalk.cyan('  Usage'));
     console.log('');
     console.log(`  ${chalk.magenta('ctxflow')}                     ${chalk.gray('→ show interactive menu')}`);
-    console.log(`  ${chalk.magenta('ctxflow init')}                ${chalk.gray('→ create CLAUDE.md + docs/ structure')}`);
+    console.log(`  ${chalk.magenta('ctxflow init')}                ${chalk.gray('→ select AI agents and create context file(s)')}`);
     console.log(`  ${chalk.magenta('ctxflow new')} ${chalk.cyan('<feature>')}    ${chalk.gray('→ scaffold docs/features/<feature>/')}`);
     console.log(`  ${chalk.magenta('ctxflow list')}                ${chalk.gray('→ list all features')}`);
     console.log(`  ${chalk.magenta('ctxflow status')} ${chalk.cyan('<feature>')} ${chalk.gray('→ show task progress for a feature')}`);

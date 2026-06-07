@@ -18,7 +18,7 @@ program
 
 program
   .command('init')
-  .description('Create CLAUDE.md and docs/ structure in the current project')
+  .description('Select AI agents and create context file(s) in the current project')
   .action(async () => {
     showBanner();
     await initCommand();

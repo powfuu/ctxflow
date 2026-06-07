@@ -45,7 +45,7 @@ npm install -g ctxflow
 ## Quick start
 
 ```bash
-# 1. Initialise your project (once)
+# 1. Initialise your project (once) — pick your AI agents
 ctxflow init
 
 # 2. Create a feature context before you start coding
@@ -64,12 +64,25 @@ Or just run `ctxflow` for the full interactive menu.
 
 ### `ctxflow init`
 
-```
-CLAUDE.md               ← AI instructions: stack, architecture, approvals, rules
-```
+Asks which AI agents you use, then creates the right context file(s) for each:
 
-**CLAUDE.md** is the single source of truth your AI assistant reads on every session.
-It contains your stack, architecture overview, approved libraries, and non-negotiable rules.
+| Agent | File |
+|-------|------|
+| Claude Code | `CLAUDE.md` |
+| Codex CLI (OpenAI) | `AGENTS.md` |
+| Cursor | `.cursor/rules/project.md` |
+| GitHub Copilot | `.github/copilot-instructions.md` |
+| Windsurf | `.windsurfrules` |
+| Gemini CLI | `GEMINI.md` |
+| Cline | `.clinerules` |
+| Aider | `CONVENTIONS.md` |
+| Amazon Q | `.amazonq/rules/context.md` |
+| Continue | `.continuerules` |
+| Devin / Kiro / others | `AGENTS.md` |
+
+Each file contains your stack, architecture overview, approved libraries, and non-negotiable rules — the single source of truth your AI reads every session.
+
+You can select multiple agents. Files that share a path (e.g. Codex CLI + Devin both use `AGENTS.md`) are written once.
 
 ### `ctxflow new <feature>`
 
@@ -89,7 +102,7 @@ Run `ctxflow` with no arguments for a full interactive experience:
   What would you like to do?
 
   [1]  New feature      — scaffold a new feature context
-  [2]  Init project     — create CLAUDE.md + /docs structure
+  [2]  Init project     — create AI context file(s) + /docs structure
   [3]  List features    — show all existing plans
   [4]  Status           — check tasks in a feature plan
   [5]  Help             — show usage and documentation
@@ -106,7 +119,7 @@ Press a number key to execute instantly — no Enter needed.
 | Command | Description |
 |--------|-------------|
 | `ctxflow` | Launch interactive menu |
-| `ctxflow init` | Scaffold `CLAUDE.md` + `docs/` in the current directory |
+| `ctxflow init` | Select AI agents and scaffold context file(s) |
 | `ctxflow new <feature>` | Create a feature context under `docs/features/<feature>/` |
 | `ctxflow list` | List all feature contexts with creation dates |
 | `ctxflow status <feature>` | Show task completion progress for a feature |
@@ -116,7 +129,7 @@ Press a number key to execute instantly — no Enter needed.
 ## The workflow
 
 ```
-1. ctxflow init          →  Write CLAUDE.md once. Define your stack, rules, boundaries.
+1. ctxflow init          →  Pick your agents. Context files written automatically.
 2. ctxflow new <feature> →  Before every feature: scaffold requirements + plan.
 3. Fill requirements.md  →  Context, constraints, acceptance criteria. Your AI reads this.
 4. Code the feature      →  AI works with full context. No guessing.
@@ -132,8 +145,8 @@ AI coding assistants are only as useful as the context they receive. Without str
 
 | Without ctxflow | With ctxflow |
 |----------------|--------------|
-| Agent guesses at your stack | Agent reads your exact stack from `CLAUDE.md` |
-| Unapproved libraries sneak in | `CLAUDE.md` lists exactly what's approved |
+| Agent guesses at your stack | Agent reads your exact stack from the context file |
+| Unapproved libraries sneak in | Context file lists exactly what's approved |
 | Requirements drift mid-feature | `requirements.md` is the single source of truth |
 | Agent asks you the same questions every session | Context is version-controlled and always available |
 
@@ -141,14 +154,21 @@ AI coding assistants are only as useful as the context they receive. Without str
 
 ## Works with any AI assistant
 
-ctxflow is **assistant-agnostic**. The generated files are plain Markdown that any AI can read:
+ctxflow supports all major AI coding agents out of the box:
 
-- **Claude** (reads `CLAUDE.md` natively)
-- **GitHub Copilot**
-- **Cursor**
-- **Windsurf**
-- **Codeium**
-- Any tool that supports reading project files
+- **Claude Code** — `CLAUDE.md`
+- **Codex CLI (OpenAI)** — `AGENTS.md`
+- **Cursor** — `.cursor/rules/project.md`
+- **GitHub Copilot** — `.github/copilot-instructions.md`
+- **Windsurf** — `.windsurfrules`
+- **Gemini CLI** — `GEMINI.md`
+- **Cline** — `.clinerules`
+- **Aider** — `CONVENTIONS.md`
+- **Amazon Q** — `.amazonq/rules/context.md`
+- **Continue** — `.continuerules`
+- **Devin / Kiro / others** — `AGENTS.md`
+
+Select one or more during `ctxflow init`. The project is considered initialised as long as any of these files exist.
 
 ---
 

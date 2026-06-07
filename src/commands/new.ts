@@ -1,6 +1,7 @@
 import { join } from 'path';
 import { readTemplate, renderTemplate, writeFile, pathExists } from '../utils/fs.js';
 import { logger } from '../utils/logger.js';
+import { isProjectInitialised } from '../utils/agents.js';
 
 const TODAY = new Date().toISOString().split('T')[0];
 
@@ -9,7 +10,7 @@ function slugify(name: string): string {
 }
 
 export async function newCommand(featureName: string, cwd = process.cwd()): Promise<void> {
-  if (!(await pathExists(join(cwd, 'CLAUDE.md')))) {
+  if (!(await isProjectInitialised(cwd))) {
     logger.error('Project not initialised. Run `ctxflow init` first.');
     return;
   }
