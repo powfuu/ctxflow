@@ -1,6 +1,6 @@
 {
   "name": "ctxflow",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Context scaffolding for AI agent-driven development",
   "type": "module",
   "bin": {
@@ -20,6 +20,14 @@
     "agents"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/powfuu/ctxflow.git"
+  },
+  "homepage": "https://github.com/powfuu/ctxflow#readme",
+  "bugs": {
+    "url": "https://github.com/powfuu/ctxflow/issues"
+  },
   "files": ["bin", "dist"],
   "engines": {
     "node": ">=18"
