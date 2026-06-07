@@ -1,6 +1,6 @@
 {
   "name": "ctxflow",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Context scaffolding for AI agent-driven development",
   "type": "module",
   "bin": {
@@ -28,7 +28,10 @@
   "bugs": {
     "url": "https://github.com/powfuu/ctxflow/issues"
   },
-  "files": ["bin", "dist"],
+  "files": [
+    "bin",
+    "dist"
+  ],
   "engines": {
     "node": ">=18"
   },
