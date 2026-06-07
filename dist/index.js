@@ -51,7 +51,6 @@ program.on('command:*', () => {
     process.exit(1);
 });
 if (process.argv.length <= 2) {
-    showBanner();
     showMenu().catch((err) => {
         logger.error(err instanceof Error ? err.message : String(err));
         process.exit(1);
